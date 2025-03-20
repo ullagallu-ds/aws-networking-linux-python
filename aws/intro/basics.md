@@ -1,37 +1,58 @@
-# S3
-- it is highly avialable[always accessible no downtime] sclable[storage any amount of data] and durable[dataloss] object storage
-- store any type of data[audio,video,zip,tar,logs,pdf]
-- s3 service is global buckets are regional bucket names are unique
-- realtime used for vpc flow logs,cloud trail logs, LB access logs,waf logs and payment invoices
-- unlimited storage but single object size more than 5TB only
+# What is Cloud Computing
+Able to access services over the internet like compute, storage, netowrk , databases, load balancers they are providing on demand services rather than maintaining physical hardware or infra locally
 
+Benefits:
+- Scalability - when ever require add more servers no need remove
+- cost efficiency - pay what you use no upfront payment
+- flexibility - access resources anywhere with an internet connection
+- reliability - no down time and redundency
+- security - invest robust security measures
 
-**storage classes**
-1. S3 standard
-2. Intelligent tiering
-3. S3 standard-IA[vpc flow logs,cloud trail logs, LB access logs,waf logs]
-4. S3 one-zone-IA[In Prod we cannot use]
-5. S3 Glacier
-as per security policy we need to maintain vpc flow logs atleast 18 months we place in S3 Glacier
-S3 Life Cycle to move vpc flow logs from standard to Glacier Deep archive after 18 months we can delete
+Public Cloud:
+aws,azure,gcp access the services over the internet
 
-We are disabled ACL's recommend we use bucket policy for object management
+Private Cloud:
+IBM, internal Data centers only for organization
 
-**Bucket versioning**
-- keep the multiple versions of object
-- without bucket versioning if you upload object again and again it will overide
-- if you enable bucket versioning it keep the multiple versions of same object
-- Generally we use terraform.tfstate we can enable for logs and all we don't 
+Hybrid Cloud:
+- combination of public and private
 
-we are always use SSE encryption only 
+Types of Cloud Services
+-----------------------
+1. Iaas
+- servers
+- volumes
+- network
+- Which can be used to build and deploy their own applications and services
+- users responsible for managing and maintain the softwares and applications they deploy on infra provided by Iaas
+Ex: EC2, S3, VPC, EBS
 
-**server access logging**
-- capture uploading and downloding of objects in bucket 99% we won't enable server logging
+n/w,storage,servers,virtualization take care by vendor
+os,middleware,runtime,data,applications take care by user
 
-**event notifications**
-- any event happend inside buket like creation,deleteion,upload object it will send notifications
-- frequntly used in realtime
+2. Pass
+without worrying about underlying infra deploy application and test it 
+- beanstalk
+- lambda
+- amazon api gw
+- ecs
+n/w,storage,servers,virtualizationos,middleware,runtime take care by vendor
+data,applications take care by user
 
-**static website hosting**
+3. Saas
+- fully managed by vendor
+- just use what they are providing for example
+- amazon workspaces
+- chime
+- workdocs
 
+What is Aws
+- It is a cloud computing platform provided by aws
+- It provides wide range of services compute,networking,storage,iam,databases,ml,analytics..
 
+Advantages:
+Disadvantages:
+
+Aws Global Infra:
+- Regions
+- Az
