@@ -1,4 +1,4 @@
-# What is a VPC Endpoint?  
+# What is a VPC Endpoint?
 A VPC Endpoint allows AWS resources inside a VPC to connect to AWS services privately, without using the public internet. This improves security, reduces data transfer costs, and enhances performance by avoiding NAT gateways, Internet Gateways (IGW), or VPN connections.  
 
 #### Why Do We Need a VPC Endpoint?  
@@ -108,4 +108,36 @@ Set up an EC2 instance in a private subnet and enable it to access S3 using a Ga
 - The EC2 instance should be able to list S3 buckets.  
 - The EC2 instance should not have internet access.  
 - The EC2 instance should be reachable via EC2 Instance Connect Endpoint.
-```  
+
+# Security Groups (SG) vs. Network ACLs (NACLs)  
+
+Security Groups (SG) are **stateful**, meaning they automatically allow response traffic for any allowed inbound request. If an instance sends a request to another service, the response is automatically permitted without needing an explicit rule. Security Groups work at the **instance level** and can only **allow** traffic, never deny it. Rules in a Security Group are **evaluated together**, meaning if any rule allows traffic, it is permitted.  
+
+Network ACLs (NACLs) are **stateless**, meaning both inbound and outbound rules must be explicitly defined for bidirectional communication. If outbound traffic is allowed, the corresponding inbound response must also be allowed separately. NACLs operate at the **subnet level** and can **allow or deny** traffic. NACLs follow a **rule evaluation order**, where rules are processed **from lowest to highest rule number**, and once a match is found, the rest are ignored.  
+
+Yeah, that was a common mistake, but now you’ve **fully nailed it**! 😎  
+
+### ✅ **Your New & Correct Answer in Interviews**
+> **"Since NACLs are stateless, we need to explicitly allow both request and response traffic.**  
+> **Backend Subnet:** Allows outbound **3306** to the DB subnet and inbound **1024-65535** for the response.  
+> **DB Subnet:** Allows inbound **3306** from the backend and outbound **1024-65535** for the response back."**  
+
+🔥 **Now you’ll impress interviewers like a pro!** 🚀
+
+### Step-by-Step Flow
+1️⃣ EC2 (Backend) sends a request to RDS on port 3306
+
+✅ Backend Subnet (Outbound Rule): Allow 3306 to DB Subnet
+✅ DB Subnet (Inbound Rule): Allow 3306 from Backend Subnet
+2️⃣ RDS (DB) sends a response back to EC2 on an ephemeral port (e.g., 45000)
+
+✅ DB Subnet (Outbound Rule): Allow 1024-65535 to Backend Subnet
+✅ Backend Subnet (Inbound Rule): Allow 1024-65535 from DB Subnet
+
+
+For example, if an EC2 instance in the backend subnet connects to an RDS database:  
+- **Backend Subnet**: Allows outbound **3306** to the DB subnet and inbound **1024-65535** for the response.  
+- **DB Subnet**: Allows inbound **3306** from the backend and outbound **1024-65535** for the response back.  
+
+Since Security Groups handle return traffic automatically, this setup is only required for NACLs. Also, in NACLs, ensure lower rule numbers allow necessary traffic, as higher-numbered rules are ignored if a match is found earlier.
+
