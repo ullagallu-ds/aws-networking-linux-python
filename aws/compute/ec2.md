@@ -14,3 +14,32 @@
  7. FPGA instances
 
  
+ status checks failed
+ - System status checks
+ - Instance Status Checks
+ - EBS volume status Checks
+Restart the ec2 instance
+
+EIP = It is a static IP generally every restart of instance ip will be change to preserve IP address change we can use EIP
+
+1. Spot instances
+   description: 
+   usecases:
+
+2. on-demand:
+   description:
+   usecases:
+3. Saving Plans:
+   description:
+   usecases:
+4. Reserved Instances
+5. Dedicated hosts
+6. Scheduled instances
+7. Capavity Reservation
+
+Actually prefer on demand and saving plans mostly
+
+Opening a support ticket with AWS
+
+- Key pair lost
+
