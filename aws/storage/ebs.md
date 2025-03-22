@@ -99,3 +99,32 @@ EBS is a highly available, reliable, and scalable block storage service used wit
 - Supports **cross-region copy of snapshots** for additional redundancy
 - Policies can be configured via **AWS Console, CLI, or API**
 
+---
+
+### AMI (Amazon Machine Image)
+- AMI is a pre-configured image that contains the OS, application software, and configurations needed to launch EC2 instances.
+- It acts as a **blueprint** for launching new instances with the same settings.
+- Includes:
+  - **Root volume** (OS and software)
+  - **Launch permissions** (Who can use the AMI)
+  - **Block device mappings** (Defines attached volumes)
+
+#### AMI Types:
+1. **Public AMIs** – Available for anyone in AWS Marketplace.
+2. **Private AMIs** – Created and used within an AWS account.
+3. **AWS Marketplace AMIs** – Paid and free AMIs provided by vendors.
+4. **Custom AMIs** – Created from an existing instance or snapshot.
+
+#### AMI Lifecycle:
+1. Create an AMI from an existing EC2 instance.
+2. Copy AMI across AWS regions.
+3. Share AMI with other AWS accounts.
+4. Deregister AMI if it's no longer needed.
+
+---
+
+### AMI Catalog
+- AMI Catalog is a collection of AMIs available in AWS Marketplace.
+- Includes AMIs from AWS, third-party vendors, and community-contributed images.
+- Can be filtered by OS, architecture, software packages, and security features.
+- Helps users select pre-configured AMIs for different workloads like web hosting, databases, and machine learning.
